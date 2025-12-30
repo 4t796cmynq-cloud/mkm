@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Наша семья</title>
+		<link rel="icon" href="загруженное.png" type="image/x-icon" />
+		<style>
+			:root {
+				--accent: #6c63ff;
+				--bg1: #101020;
+				--bg2: #1f1f33;
+				--text: #f3f3f3;
+			}
+
+			body {
+				font-family: 'Poppins', sans-serif;
+				margin: 0;
+				background: linear-gradient(135deg, var(--bg1), var(--bg2));
+				color: var(--text);
+				overflow-x: hidden;
+			}
+
+			/* Hero Section */
+			.hero {
+				position: relative;
+				height: 85vh;
+				background: url('photos/family-main.jpg') center/cover no-repeat;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				color: white;
+			}
+
+			.hero::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.4);
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+				padding: 20px;
+				animation: fadeIn 2s ease-in;
+			}
+
+			.hero-content h1 {
+				font-size: 3em;
+				text-shadow: 0 0 15px var(--accent);
+				margin-bottom: 10px;
+			}
+
+			.hero-content p {
+				font-size: 1.2em;
+				color: #ddd;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Общий стиль секций */
+			section {
+				padding: 50px 30px;
+				text-align: center;
+				position: relative;
+				z-index: 2;
+			}
+
+			h2 {
+				color: var(--accent);
+				font-size: 2em;
+				margin-bottom: 20px;
+				text-shadow: 0 0 10px var(--accent);
+			}
+
+			/* Галерея семьи */
+			.family-gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+				gap: 25px;
+			}
+
+			.member-card {
+				background: rgba(255, 255, 255, 0.08);
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+				transition: transform 0.4s ease, box-shadow 0.4s ease;
+			}
+
+			.member-card:hover {
+				transform: translateY(-5px) scale(1.03);
+				box-shadow: 0 0 30px var(--accent);
+			}
+
+			.member-card img {
+				width: 100%;
+				height: 300px;
+				object-fit: cover;
+			}
+
+			.caption {
+				padding: 15px;
+				background: rgba(0, 0, 0, 0.4);
+				font-weight: 500;
+				color: #fff;
+				letter-spacing: 0.5px;
+			}
+
+			/* Дополнительная фотогалерея */
+			.photo-gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+				gap: 20px;
+			}
+
+			.photo-gallery img {
+				width: 100%;
+				height: 300px;
+				border-radius: 12px;
+				object-fit: cover;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+				transition: transform 0.3s;
+			}
+
+			.photo-gallery img:hover {
+				transform: scale(1.05);
+			}
+
+			footer {
+				text-align: center;
+				padding: 20px;
+				font-size: 0.9em;
+				color: #bbb;
+				background: rgba(0, 0, 0, 0.3);
+			}
+
+			/* Кнопка музыки */
+			.music-btn {
+				position: fixed;
+				top: 20px;
+				right: 20px;
+				width: 55px;
+				height: 55px;
+				border-radius: 50%;
+				background: var(--accent);
+				box-shadow: 0 0 15px var(--accent);
+				border: none;
+				color: white;
+				font-size: 24px;
+				cursor: pointer;
+				transition: transform 0.3s, box-shadow 0.3s;
+				z-index: 10;
+			}
+
+			.music-btn:hover {
+				transform: scale(1.1);
+				box-shadow: 0 0 25px var(--accent);
+			}
+
+			/* ❄️ Снег ❄️ */
+			.snowflake {
+				position: fixed;
+				top: -10px;
+				color: white;
+				font-size: 1em;
+				user-select: none;
+				pointer-events: none;
+				animation: fall linear forwards;
+				opacity: 0.8;
+				z-index: 1;
+			}
+
+			@keyframes fall {
+				0% {
+					transform: translateY(0);
+					opacity: 1;
+				}
+				100% {
+					transform: translateY(100vh);
+					opacity: 0.3;
+				}
+			}
+
+			@media (max-width: 600px) {
+				.hero-content h1 {
+					font-size: 2em;
+				}
+				.member-card img {
+					height: 200px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Главная фотография -->
+		<section class="hero">
+			<div class="hero-content">
+				<h1>Семья Шакировых</h1>
+				<p>С любовью, теплом и счастливыми моментами ❤️</p>
+			</div>
+			<div class="member-card">
+				<img src="photes/fam.jpg" alt="Мама" />
+			</div>
+		</section>
+
+		<!-- Музыкальная кнопка -->
+		<button class="music-btn" id="musicToggle">🎵</button>
+
+		<!-- Члены семьи -->
+		<section>
+			<h2>Наши близкие</h2>
+			<div class="family-gallery">
+				<div class="member-card">
+					<img src="mama.jpg" alt="Мама" />
+					<div class="caption">Мама - любовь и вдохновение 💖</div>
+				</div>
+				<div class="member-card">
+					<img src="papa.jpg" alt="Папа" />
+					<div class="caption">Папа - опора и сила семьи 💪</div>
+				</div>
+				<div class="member-card">
+					<img src="Ell.jpg" alt="Сын" />
+					<div class="caption">ЭлларияЯЯ - плюс вайбик в семеье 🚀</div>
+				</div>
+				<div class="member-card">
+					<img src="Dilara.jpg" alt="Диляра" />
+					<div class="caption">Диляра - художница 🤟</div>
+				</div>
+				<div class="member-card">
+					<img src="dili.jpg" alt="Дилияна" />
+					<div class="caption">Дилияна - танцор диско 💃</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Дополнительные фото -->
+		<section>
+			<h2>Семейные фотографии</h2>
+			<div class="photo-gallery">
+				<img src="on.jpg" alt="Фото 1" />
+				<img src="kaza.jpg" alt="Фото 2" />
+				<img src="y.jpg" alt="Фото 3" />
+				<img src="v.jpg" alt="Фото 4" />
+				<img src="gg.jpg" alt="Фото 5" />
+			</div>
+		</section>
+
+		<footer>
+			<p>© 2025 Семья Шакировых</p>
+		</footer>
+
+		<audio id="backgroundMusic" loop>
+			<source src="JElvin_Grejj_-_Novyjj_god_77049901.mp3" type="audio/mpeg" />
+		</audio>
+
+		<script>
+			// ❄️ Снег
+			const snowContainer = document.createElement('div')
+			document.body.appendChild(snowContainer)
+
+			function createSnowflake() {
+				const snowflake = document.createElement('div')
+				snowflake.classList.add('snowflake')
+				snowflake.textContent = '❄'
+				snowflake.style.left = Math.random() * 100 + 'vw'
+				snowflake.style.fontSize = Math.random() * 10 + 10 + 'px'
+				snowflake.style.animationDuration = Math.random() * 5 + 5 + 's'
+				snowflake.style.opacity = Math.random()
+				snowContainer.appendChild(snowflake)
+				setTimeout(() => snowflake.remove(), 10000)
+			}
+
+			setInterval(createSnowflake, 200)
+
+			// 🎵 Музыка
+			const music = document.getElementById('backgroundMusic')
+			const btn = document.getElementById('musicToggle')
+			let playing = false
+
+			btn.addEventListener('click', () => {
+				if (!playing) {
+					music.play()
+					btn.textContent = '⏸️'
+					playing = true
+				} else {
+					music.pause()
+					btn.textContent = '🎵'
+					playing = false
+				}
+			})
+		</script>
+	</body>
+</html>
